@@ -1,0 +1,75 @@
+:root{
+  --bg: #f7fafc;
+  --surface: #ffffff;
+  --muted: #6b7280;
+  --primary: #2563eb;
+  --glass: rgba(15,23,42,0.04);
+  --radius: 12px;
+  --shadow: 0 6px 18px rgba(15,23,42,0.06);
+  --shadow-soft: 0 4px 10px rgba(15,23,42,0.04);
+}
+*{box-sizing:border-box}
+body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; background:var(--bg); color:#0f172a; -webkit-font-smoothing:antialiased}
+.page{max-width:1200px;margin:32px auto;padding:20px}
+.hero{display:flex;gap:24px;align-items:center;justify-content:space-between;margin-bottom:28px}
+.hero-left{flex:1;min-width:260px}
+.hero-right{width:420px}
+h1{font-size:28px;margin:0 0 10px}
+.lead{color:var(--muted);margin:0 0 18px;max-width:48ch}
+.btn{border:0;padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer}
+.btn.primary{background:var(--primary);color:white;box-shadow:var(--shadow-soft)}
+.btn.ghost{background:transparent;border:1px solid rgba(15,23,42,0.06);color:var(--primary)}
+.btn.small{padding:6px 10px;font-size:13px}
+.hero-cta{display:flex;gap:12px;margin-bottom:18px}
+.stats{display:flex;gap:12px;margin-top:6px}
+.stat{background:var(--surface);padding:10px 12px;border-radius:10px;box-shadow:var(--shadow-soft);display:flex;flex-direction:column;align-items:flex-start}
+.stat strong{font-size:16px}
+.card{background:var(--surface);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow);}
+.chat-preview{height:160px;display:flex;flex-direction:column;gap:8px;overflow:hidden}
+.message{padding:10px 12px;border-radius:12px;max-width:80%;font-size:14px}
+.message.bot{background:#eef2ff;color:#0f172a;align-self:flex-start}
+.message.user{background:#e6fffa;align-self:flex-end}
+.section{margin:28px 0}
+.section h2{margin:0 0 14px;font-size:20px}
+.grid{display:grid;gap:14px}
+.cards{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.about .card .icon{font-size:24px;margin-bottom:8px}
+.objectives-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.num-card{background:var(--surface);padding:16px;border-radius:12px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow-soft)}
+.num{background:var(--glass);padding:10px;border-radius:10px;font-weight:700;color:var(--muted)}
+.flow-row{display:flex;gap:10px;align-items:center;padding:12px 6px;overflow:auto}
+.flow-step{background:var(--surface);padding:10px 14px;border-radius:999px;box-shadow:var(--shadow-soft);min-width:120px;text-align:center}
+.flow-step.highlight{outline:3px solid rgba(37,99,235,0.12);box-shadow:0 8px 24px rgba(37,99,235,0.08)}
+.arrow{color:var(--muted);font-size:18px}
+.intents-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.intent .badge{display:inline-block;padding:6px 8px;border-radius:999px;font-size:12px;margin-bottom:8px}
+.badge.core{background:#eef2ff;color:#1e3a8a}
+.badge.skin{background:#ffefef;color:#7f1d1d}
+.badge.diet{background:#ecfdf5;color:#065f46}
+.badge.rule{background:#f8fafc;color:#334155}
+.chat-sample{max-width:680px}
+.chat-sample .msg{padding:12px;border-radius:12px;margin-bottom:8px}
+.chat-sample .bot{background:#fff7ed}
+.chat-sample .user{background:#eef2ff;margin-left:auto;max-width:70%}
+.chatbot-inner{display:flex;gap:18px;align-items:flex-start}
+.chatbot-left{flex:1;min-width:260px}
+.chatbot-right{width:360px}
+.chatbot-box{display:flex;flex-direction:column;height:360px;overflow:hidden}
+.cb-header{padding:12px;border-bottom:1px solid rgba(15,23,42,0.04);font-weight:700}
+.cb-body{padding:12px;flex:1;overflow:auto;display:flex;flex-direction:column;gap:8px}
+.cb-input{display:flex;gap:8px;padding:12px;border-top:1px solid rgba(15,23,42,0.04)}
+.cb-input input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(15,23,42,0.06)}
+.footer{text-align:center;color:var(--muted);padding:18px 0;font-size:13px}
+
+/* Responsive */
+@media (max-width:900px){
+  .hero{flex-direction:column}
+  .hero-right{width:100%}
+  .chatbot-inner{flex-direction:column}
+}
+
+/* Make flow-row scrollable on mobile */
+@media (max-width:640px){
+  .flow-row{padding:8px 6px;gap:8px}
+  .flow-step{min-width:140px}
+}

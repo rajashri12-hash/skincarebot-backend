@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Skincare Chatbot — UI</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-left">
+        <h1>Your personal skincare assistant</h1>
+        <p class="lead">A concise, smart chatbot that guides users through skin concerns and tailors recommendations using intents and rules.</p>
+
+        <div class="hero-cta">
+          <button id="startChat" class="btn primary">Start Chatting</button>
+          <button id="viewIntents" class="btn ghost">View Intents</button>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><strong>24</strong><span>Intents</span></div>
+          <div class="stat"><strong>18</strong><span>Entities</span></div>
+          <div class="stat"><strong>72</strong><span>Steps</span></div>
+          <div class="stat"><strong>12</strong><span>Rule-based</span></div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="card chat-preview" id="chatPreview">
+          <div class="message bot">Hi! I’m your skincare assistant — what brings you here today?</div>
+          <div class="message user">I have dry, flaky skin and want a simple routine.</div>
+          <div class="message bot">Great — I’ll ask a few questions to tailor recommendations.</div>
+        </div>
+      </div>
+    </header>
+
+    <section class="about section" id="about">
+      <h2>About</h2>
+      <div class="grid cards">
+        <div class="card"><div class="icon">🧠</div><h3>Technology</h3><p>Dialogflow-driven conversational engine with rule-based fallbacks.</p></div>
+        <div class="card"><div class="icon">🎯</div><h3>Purpose</h3><p>Help users identify skin issues and suggest gentle routines.</p></div>
+        <div class="card"><div class="icon">👥</div><h3>Target Users</h3><p>Consumers seeking tailored skincare guidance and professionals prototyping flows.</p></div>
+        <div class="card"><div class="icon">📦</div><h3>Scope</h3><p>Assessment, recommendations, and routine suggestions — not medical advice.</p></div>
+      </div>
+    </section>
+
+    <section class="objectives section" id="objectives">
+      <h2>Objectives</h2>
+      <div class="grid objectives-grid">
+        <!-- 8 numbered cards -->
+        <div class="num-card"><div class="num">01</div><p>Quick, friendly greeting</p></div>
+        <div class="num-card"><div class="num">02</div><p>Identify main skin problem</p></div>
+        <div class="num-card"><div class="num">03</div><p>Determine skin type</p></div>
+        <div class="num-card"><div class="num">04</div><p>Factor in weather</p></div>
+        <div class="num-card"><div class="num">05</div><p>Check allergies</p></div>
+        <div class="num-card"><div class="num">06</div><p>Assess diet type</p></div>
+        <div class="num-card"><div class="num">07</div><p>Assess diet quality</p></div>
+        <div class="num-card"><div class="num">08</div><p>Collect preferences & routine</p></div>
+      </div>
+    </section>
+
+    <section class="flow section" id="flow">
+      <h2>Conversation Flow</h2>
+      <div class="flow-row" role="list">
+        <div class="flow-step">Greeting</div>
+        <div class="arrow">➜</div>
+        <div class="flow-step">Skin Problem</div>
+        <div class="arrow">➜</div>
+        <div class="flow-step">Skin Type</div>
+        <div class="arrow">➜</div>
+        <div class="flow-step">Weather</div>
+        <div class="arrow">➜</div>
+        <div class="flow-step">Allergy</div>
+        <div class="arrow">➜</div>
+        <div class="flow-step">Diet Type</div>
+        <div class="arrow">➜</div>
+        <div class="flow-step">Diet Quality</div>
+        <div class="arrow">➜</div>
+        <div class="flow-step">Preference</div>
+        <div class="arrow">➜</div>
+        <div class="flow-step highlight">Routine</div>
+      </div>
+    </section>
+
+    <section class="intents section" id="intents">
+      <h2>Intents</h2>
+      <div class="grid intents-grid">
+        <div class="card intent"><div class="badge core">Core</div><h4>Greeting</h4><p>Opener for the flow.</p></div>
+        <div class="card intent"><div class="badge skin">Skin</div><h4>Skin Problem</h4><p>Detect dryness, acne, sensitivity.</p></div>
+        <div class="card intent"><div class="badge diet">Diet</div><h4>Diet Check</h4><p>Collects diet-related info.</p></div>
+        <div class="card intent"><div class="badge rule">Rule</div><h4>Allergy Check</h4><p>Rule-based decision for allergens.</p></div>
+      </div>
+    </section>
+
+    <section class="sample-chat section" id="sample-chat">
+      <h2>Sample Chat</h2>
+      <div class="chat-sample card">
+        <div class="msg bot">Hello! How can I help your skin today?</div>
+        <div class="msg user">I have redness and dry patches.</div>
+        <div class="msg bot">Thanks — do you have any known allergies?</div>
+      </div>
+    </section>
+
+    <section class="chatbot-section section" id="chatbot">
+      <div class="chatbot-inner">
+        <div class="chatbot-left">
+          <h2>Chatbot</h2>
+          <p>Interact with the assistant on the right. Click <strong>Start Chatting</strong> to open the chat box and begin a test conversation.</p>
+          <ul>
+            <li>Tip: Keep responses short and clear.</li>
+            <li>Tip: Use the intents view to inspect available flows.</li>
+          </ul>
+        </div>
+        <div class="chatbot-right">
+          <div class="card chatbot-box" id="chatBox">
+            <div class="cb-header">Skincare Assistant</div>
+            <div class="cb-body" id="cbBody">
+              <div class="msg bot">Welcome back — ready to start?</div>
+            </div>
+            <div class="cb-input">
+              <input id="cbInput" placeholder="Type a message..." />
+              <button id="cbSend" class="btn primary small">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">© Skincare Chatbot — UI preview</footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
