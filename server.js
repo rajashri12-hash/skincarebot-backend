@@ -4,6 +4,7 @@ import cors from "cors";
 import { SessionsClient } from "@google-cloud/dialogflow";
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { randomUUID } from 'crypto';
 
 console.log("Starting Dialogflow server...");
 
@@ -99,11 +100,19 @@ function extractTextFromPayload(payload) {
   return dfs(normalized);
 }
 
+function sanitizeSessionId(rawSessionId) {
+  const value = String(rawSessionId || '').trim();
+  if (!value) return '';
+  return value.replace(/[^a-zA-Z0-9_-]/g, '_').slice(0, 120);
+}
+
 const app = express();
 app.use(bodyParser.json());
 app.use(cors()); // allow requests from your React frontend
 // Serve static UI from the `public/` folder
 app.use(express.static('public'));
+
+const sessionByClient = new Map();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -139,12 +148,25 @@ try {
 }
 
 app.post("/api/dialogflow", async (req, res) => {
-  const { text } = req.body;
+  const { text, sessionId: incomingSessionId } = req.body || {};
   console.log("Received text:", text);
+
+  const clientKey = (req.get('x-forwarded-for') || req.ip || '').split(',')[0].trim();
+  const mappedSessionId = clientKey ? sessionByClient.get(clientKey) : '';
+
+  const stableSessionId =
+    sanitizeSessionId(incomingSessionId) ||
+    sanitizeSessionId(req.get('x-session-id')) ||
+    sanitizeSessionId(mappedSessionId) ||
+    `web-${randomUUID()}`;
+
+  if (clientKey && !sessionByClient.has(clientKey)) {
+    sessionByClient.set(clientKey, stableSessionId);
+  }
 
   const sessionPath = client.projectAgentSessionPath(
     process.env.DIALOGFLOW_PROJECT_ID || "skincarebot-vefg",
-    "session-" + Date.now()
+    stableSessionId
   );
 
   const request = {
@@ -206,10 +228,10 @@ app.post("/api/dialogflow", async (req, res) => {
     console.log("Suggestions:", suggestions);
     console.log("Links:", links);
 
-    res.json({ reply, suggestions, links });
+    res.json({ reply, suggestions, links, sessionId: stableSessionId });
   } catch (err) {
     console.error("Dialogflow error:", err); // log full error
-    res.status(500).json({ reply: "Error contacting Dialogflow." });
+    res.status(500).json({ reply: "Error contacting Dialogflow.", sessionId: stableSessionId });
   }
 });
 
